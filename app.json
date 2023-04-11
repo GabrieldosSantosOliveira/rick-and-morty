@@ -1,15 +1,16 @@
 {
   "expo": {
-    "name": "rick-and-morty",
+    "name": "Rick And Morty",
     "slug": "rick-and-morty",
     "version": "1.0.0",
     "orientation": "portrait",
+    "jsEngine": "hermes",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#09090A"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,11 +21,14 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#09090A"
+      },
+      "package": "com.gabriel85.rickandmorty"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "extra": {
+      "eas": {
+        "projectId": "38155b80-1f55-49ce-b8b4-6254e7c26529"
+      }
     }
   }
 }
