@@ -11,6 +11,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "author": "Gabriel dos Santos Oliveira <gabrielsantosoliveira951@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@expo-google-fonts/lexend": "^0.2.3",
     "@expo/vector-icons": "^13.0.0",
