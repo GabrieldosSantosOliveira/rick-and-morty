@@ -6,69 +6,26 @@ import {
   RefreshControl,
   SkeletonEpisodes,
 } from '@/components';
-import { useService } from '@/hooks';
+import { useEpisodes } from '@/hooks';
 import { EpisodeDto } from '@/models';
-import { GetEpisodes } from '@/services';
 import { Theme } from '@/styles';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { View, FlatList, ListRenderItem } from 'react-native';
 export const Episodes = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [hasMoreData, setHasMoreData] = useState<boolean>(true);
-  const [refreshing, setRefreshing] = useState<boolean>(false);
-
-  const [episodes, setEpisodes] = useState<EpisodeDto[]>([]);
-  const [page, setPage] = useState<number>(1);
-
-  const { httpService } = useService();
-  const getEpisodes = new GetEpisodes(httpService);
-
   const { colors } = Theme;
 
-  const fetchEpisodes = async () => {
-    try {
-      if (!hasMoreData) return;
-      const { data } = await getEpisodes.getAllEpisodes(page);
-      const current = data.results;
-      setEpisodes((prev) => {
-        const episodes = {} as { [key: number]: EpisodeDto };
-        [...prev, ...current].forEach((item) => {
-          episodes[item.id] = item;
-        });
-        return Object.values(episodes);
-      });
-      setPage((prev) => prev + 1);
-      if (!data.info.next) {
-        setHasMoreData(false);
-      }
-    } catch (error) {
-      setHasMoreData(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  const handleRefresh = async () => {
-    try {
-      setIsLoading(true);
-      setHasMoreData(true);
-      const { data } = await getEpisodes.getAllEpisodes(1);
-      const current = data.results;
-      setEpisodes(current);
-      setPage(2);
-      if (!data.info.next) {
-        setHasMoreData(false);
-      }
-    } catch {
-      setHasMoreData(false);
-    } finally {
-      setIsLoading(false);
-      setRefreshing(false);
-    }
-  };
+  const {
+    episodes,
+    isLoading,
+    isRefreshing,
+    fetchEpisodes,
+    handleRefresh,
+    hasMoreData,
+  } = useEpisodes();
 
-  const renderItem: ListRenderItem<EpisodeDto> = ({ item }) => {
+  const renderItem: ListRenderItem<EpisodeDto> = useCallback(({ item }) => {
     return <Episode {...item} />;
-  };
+  }, []);
   useEffect(() => {
     fetchEpisodes();
   }, []);
@@ -80,7 +37,10 @@ export const Episodes = () => {
       ) : (
         <FlatList
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={handleRefresh}
+            />
           }
           ListEmptyComponent={<ListEmptyEpisodes />}
           contentContainerStyle={{ paddingBottom: 20 }}

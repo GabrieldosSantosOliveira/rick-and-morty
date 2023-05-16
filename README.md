@@ -11,10 +11,10 @@ https://user-images.githubusercontent.com/86084272/231308419-b16bf71e-0121-4346-
 - Loading Skeleton
 
 ## 🛠️ Tecnologias
-- [TypeScript](https://www.typescriptlang.org/) 
+- [TypeScript](https://www.typescriptlang.org/)
 - [Git](https://git-scm.com/)
 - [Expo](https://docs.expo.dev/)
-- [React Native](https://reactnative.dev/) 
+- [React Native](https://reactnative.dev/)
 - [React Navigation](https://reactnavigation.org/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
@@ -36,7 +36,7 @@ git clone https://github.com/GabrieldosSantosOliveira/rick-and-morty.git
 ```
 Instale as dependências
 ```bash
-yarn 
+yarn
 ```
 Execute com o expo
 ```bash
@@ -47,5 +47,5 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## Autor
 | [<img src="https://avatars.githubusercontent.com/u/86084272?v=4" width=115><br><sub>Gabriel Oliveira</sub>](https://www.linkedin.com/in/gabriel-dos-santos-oliveira-24b67b243/)
-| :---: | 
+| :---: |
 

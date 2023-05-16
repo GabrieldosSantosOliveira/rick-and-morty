@@ -1,4 +1,5 @@
 import { Theme } from '@/styles';
+import { LinearGradient } from 'expo-linear-gradient';
 import { FC, useEffect, memo } from 'react';
 import { ViewProps } from 'react-native';
 import Animated, {
@@ -14,11 +15,9 @@ import Animated, {
 export interface SkeletonProps extends AnimateProps<ViewProps> {
   translateX: number;
   backgroundColor?: string;
-  color?: string;
 }
 const SkeletonBase: FC<SkeletonProps> = ({
   translateX,
-  color,
   backgroundColor,
   style,
   ...props
@@ -28,25 +27,18 @@ const SkeletonBase: FC<SkeletonProps> = ({
   const { colors } = Theme;
   useEffect(() => {
     skeletonValue.value = withRepeat(
-      withTiming(1, { easing: Easing.ease, duration: 700 }),
+      withTiming(1, { easing: Easing.ease, duration: 2000 }),
       -1,
     );
   }, []);
-  const opacity = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      skeletonValue.value,
-      [0, 1],
-      [1, 0.5],
-      Extrapolate.CLAMP,
-    ),
-  }));
+
   const textStyle = useAnimatedStyle(() => ({
     transform: [
       {
         translateX: interpolate(
           skeletonValue.value,
           [0, 1],
-          [-20, translateX],
+          [-300, translateX + 300],
           Extrapolate.CLAMP,
         ),
       },
@@ -61,7 +53,6 @@ const SkeletonBase: FC<SkeletonProps> = ({
           overflow: 'hidden',
           backgroundColor: backgroundColor ? backgroundColor : colors.primary,
         },
-        opacity,
       ]}
       {...props}
     >
@@ -69,13 +60,26 @@ const SkeletonBase: FC<SkeletonProps> = ({
         style={[
           textStyle,
           {
-            width: 20,
+            width: '50%',
             borderRadius: 8,
             height: '100%',
-            backgroundColor: color ? color : colors.primary,
+            backgroundColor: 'transparent',
           },
         ]}
-      />
+      >
+        <LinearGradient
+          colors={['rgba(100, 50, 200, 1)', 'rgba(110, 50, 200, 1)']}
+          style={{ flex: 1 }}
+          start={{
+            x: 0.2,
+            y: 1,
+          }}
+          end={{
+            x: 1,
+            y: 1,
+          }}
+        />
+      </Animated.View>
     </Animated.View>
   );
 };
