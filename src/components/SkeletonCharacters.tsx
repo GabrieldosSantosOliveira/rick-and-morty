@@ -1,13 +1,13 @@
 import { memo } from 'react';
-import { FlatList } from 'react-native';
 
 import { SkeletonCharacter } from './Character';
-
+import {FlashList} from '@shopify/flash-list'
 const SkeletonCharactersBase = () => {
   return (
-    <FlatList
+    <FlashList
       data={Array.from({ length: 20 })}
-      style={{ paddingHorizontal: 10 }}
+      estimatedItemSize={162}
+      contentContainerStyle={{paddingHorizontal: 12}}
       renderItem={() => <SkeletonCharacter />}
       keyExtractor={() => Math.random().toString()}
     />

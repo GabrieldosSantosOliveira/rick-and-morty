@@ -1,13 +1,14 @@
 import { memo } from 'react';
-import { FlatList } from 'react-native';
+import { FlashList} from '@shopify/flash-list'
 
 import { SkeletonEpisode } from './Episode';
 
 const SkeletonEpisodesBase = () => {
   return (
-    <FlatList
+    <FlashList
+     estimatedItemSize={162}
       data={Array.from({ length: 20 })}
-      style={{ paddingHorizontal: 10 }}
+      contentContainerStyle={{ paddingHorizontal: 10 }}
       renderItem={() => <SkeletonEpisode />}
       keyExtractor={() => Math.random().toString()}
     />

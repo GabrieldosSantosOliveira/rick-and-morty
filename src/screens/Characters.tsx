@@ -10,8 +10,9 @@ import { useCharacters } from '@/hooks';
 import { CharacterDto } from '@/models';
 import { Theme } from '@/styles';
 import { useCallback, useEffect } from 'react';
-import { FlatList, ListRenderItem, View } from 'react-native';
-
+import {  View } from 'react-native';
+import {ListRenderItem, FlashList
+} from '@shopify/flash-list'
 export const Characters = () => {
   const {
     isLoading,
@@ -40,9 +41,8 @@ export const Characters = () => {
       {isLoading ? (
         <SkeletonCharacters />
       ) : (
-        <FlatList
-          style={{ paddingHorizontal: 10 }}
-          contentContainerStyle={{ paddingBottom: 20 }}
+        <FlashList
+          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal:12 }}
           data={characters}
           ListEmptyComponent={<ListEmptyCharacters />}
           refreshControl={
@@ -52,6 +52,7 @@ export const Characters = () => {
             />
           }
           renderItem={renderItem}
+          estimatedItemSize={166}
           keyExtractor={({ id }) => String(id)}
           onEndReachedThreshold={0.1}
           onEndReached={fetchCharacters}

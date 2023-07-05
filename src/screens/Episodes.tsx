@@ -10,7 +10,8 @@ import { useEpisodes } from '@/hooks';
 import { EpisodeDto } from '@/models';
 import { Theme } from '@/styles';
 import { useCallback, useEffect } from 'react';
-import { View, FlatList, ListRenderItem } from 'react-native';
+import { View } from 'react-native';
+import {FlashList, ListRenderItem} from '@shopify/flash-list'
 export const Episodes = () => {
   const { colors } = Theme;
 
@@ -23,7 +24,7 @@ export const Episodes = () => {
     hasMoreData,
   } = useEpisodes();
 
-  const renderItem: ListRenderItem<EpisodeDto> = useCallback(({ item }) => {
+  const renderItem: ListRenderItem<EpisodeDto> = useCallback(({ item ,}) => {
     return <Episode {...item} />;
   }, []);
   useEffect(() => {
@@ -35,20 +36,20 @@ export const Episodes = () => {
       {isLoading ? (
         <SkeletonEpisodes />
       ) : (
-        <FlatList
-          refreshControl={
+        <FlashList
+        data={episodes}
+        refreshControl={
             <RefreshControl
               refreshing={isRefreshing}
               onRefresh={handleRefresh}
             />
           }
           ListEmptyComponent={<ListEmptyEpisodes />}
-          contentContainerStyle={{ paddingBottom: 20 }}
+          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal:12 }}
           onEndReached={fetchEpisodes}
           onEndReachedThreshold={0.1}
-          data={episodes}
           renderItem={renderItem}
-          style={{ paddingHorizontal: 12 }}
+          estimatedItemSize={112}
           keyExtractor={({ id }) => String(id)}
           ListFooterComponent={<LoadingFlatList isLoading={hasMoreData} />}
         />
