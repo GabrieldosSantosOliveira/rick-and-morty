@@ -3,7 +3,7 @@ import { Theme } from '@/styles';
 import { FC, memo } from 'react';
 import { Text, View } from 'react-native';
 const EpisodeBase: FC<EpisodeDto> = ({ name, episode, air_date }) => {
-  const { colors, fonts, fontSize } = Theme;
+  const { colors, fonts } = Theme;
   return (
     <View
       style={{
@@ -19,7 +19,7 @@ const EpisodeBase: FC<EpisodeDto> = ({ name, episode, air_date }) => {
       <Text
         style={{
           fontFamily: fonts.Lexend[600],
-          fontSize: fontSize[16],
+          fontSize: 16,
           color: colors.white,
         }}
       >
@@ -28,7 +28,7 @@ const EpisodeBase: FC<EpisodeDto> = ({ name, episode, air_date }) => {
       <Text
         style={{
           fontFamily: fonts.Lexend[600],
-          fontSize: fontSize[12],
+          fontSize: 12,
           color: colors.black,
         }}
       >

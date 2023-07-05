@@ -61,7 +61,7 @@ const CharacterBase = (props: CharacterDto) => {
         <Text
           style={{
             color: Theme.colors.white,
-            fontSize: Theme.fontSize[16],
+            fontSize: 16,
             fontFamily: Theme.fonts.Lexend[700],
             textAlign: 'center',
           }}

@@ -4,7 +4,7 @@ import { Fontisto, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const { Screen, Navigator } = createBottomTabNavigator();
 export const AppRoutes = () => {
-  const { colors, fontSize, fonts } = Theme;
+  const { colors, fonts } = Theme;
   return (
     <Navigator
       screenOptions={{
@@ -19,7 +19,7 @@ export const AppRoutes = () => {
         tabBarItemStyle: { paddingVertical: 10 },
         tabBarLabelStyle: {
           fontFamily: fonts.Lexend[600],
-          fontSize: fontSize[12],
+          fontSize: 12,
         },
       }}
     >
