@@ -1,4 +1,4 @@
-import { Theme } from '@/styles/Theme';
+import { Theme } from '@/ui/styles/Theme';
 import { Fontisto, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MakeCharacters } from '../factories/screens/MakeCharacters';
@@ -15,7 +15,7 @@ export const AppRoutes = () => {
         tabBarStyle: {
           backgroundColor: colors.background,
           borderTopWidth: 0,
-          height: 70,
+          height: 60,
         },
         tabBarItemStyle: { paddingVertical: 10 },
         tabBarLabelStyle: {
@@ -27,8 +27,8 @@ export const AppRoutes = () => {
       <Screen
         name="characters"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Fontisto name="persons" size={size} color={color} />
+          tabBarIcon: ({ color }) => (
+            <Fontisto name="persons" size={18} color={color} />
           ),
           tabBarLabel: 'Personagens',
         }}
@@ -37,8 +37,8 @@ export const AppRoutes = () => {
       <Screen
         name="episodes"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Entypo name="folder" size={size} color={color} />
+          tabBarIcon: ({ color }) => (
+            <Entypo name="folder" size={18} color={color} />
           ),
           tabBarLabel: 'Episódios',
         }}

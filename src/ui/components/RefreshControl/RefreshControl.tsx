@@ -1,4 +1,4 @@
-import { Theme } from '@/styles/Theme';
+import { Theme } from '@/ui/styles/Theme';
 import { FC, memo } from 'react';
 import {
   RefreshControl as ReactNativeRefreshControl,

@@ -1,4 +1,4 @@
-import { Theme } from '@/styles';
+import { Theme } from '@/ui/styles';
 import { Text, View } from 'react-native';
 
 export const ListEmptyEpisodes = () => {

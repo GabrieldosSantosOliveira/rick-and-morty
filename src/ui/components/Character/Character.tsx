@@ -1,4 +1,4 @@
-import { Theme } from '@/styles/Theme';
+import { Theme } from '@/ui/styles/Theme';
 import { memo, useState } from 'react';
 import { Image, Text, View, ActivityIndicator } from 'react-native';
 import { Character as CharacterUiModel } from '@/domain/entities/Character';

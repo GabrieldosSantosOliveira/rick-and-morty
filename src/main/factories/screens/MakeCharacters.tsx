@@ -1,4 +1,4 @@
-import { Characters } from '@/screens/Characters';
+import { Characters } from '@/ui/screens/Characters';
 import { makeHttpClient } from '../infra/MakeHttpClient';
 import { GetCharactersByPageRepositoryImpl } from '@/infra/repositories/GetCharactersByPageRepositoryImpl';
 import { GetCharactersByPageUseCaseImpl } from '@/data/use-cases/GetCharactersByPageUseCaseImpl';

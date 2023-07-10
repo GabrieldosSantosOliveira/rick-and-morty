@@ -5,10 +5,10 @@ import {
   LoadingFlatList,
   RefreshControl,
   SkeletonEpisodes,
-} from '@/components/index';
-import { useEpisodes } from '@/hooks/useEpisodes';
+} from '@/ui/components/index';
+import { useEpisodes } from '@/ui/hooks/useEpisodes';
 import { Episode as EpisodeUiModel } from '@/domain/entities/Episode';
-import { Theme } from '@/styles/Theme';
+import { Theme } from '@/ui/styles/Theme';
 import { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import { FlashList, ListRenderItem } from '@shopify/flash-list';

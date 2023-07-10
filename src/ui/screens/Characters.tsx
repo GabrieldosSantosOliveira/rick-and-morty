@@ -5,9 +5,9 @@ import {
   HeaderCharacter,
   RefreshControl,
   ListEmptyCharacters,
-} from '@/components/index';
-import { useCharacters } from '@/hooks/useCharacters';
-import { Theme } from '@/styles/Theme';
+} from '@/ui/components/index';
+import { useCharacters } from '@/ui/hooks/useCharacters';
+import { Theme } from '@/ui/styles/Theme';
 import { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import { ListRenderItem, FlashList } from '@shopify/flash-list';

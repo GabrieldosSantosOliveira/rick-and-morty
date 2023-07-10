@@ -1,4 +1,4 @@
-import { Theme } from '@/styles/Theme';
+import { Theme } from '@/ui/styles/Theme';
 import React, { FC, memo } from 'react';
 import { Text, View } from 'react-native';
 import { Episode as EpisodeUiModel } from '@/domain/entities/Episode';

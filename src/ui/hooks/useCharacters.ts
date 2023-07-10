@@ -17,7 +17,6 @@ export const useCharacters = (
     try {
       if (!hasMoreData) return;
       const charactersOrError = await getCharactersByPageUseCase.execute(page);
-     console.log("jj")
       if (charactersOrError.isRight()) {
         const current = charactersOrError.value.characters.filter(
           (character) => !characters.includes(character),
@@ -50,7 +49,6 @@ export const useCharacters = (
       setHasMoreData(true);
       setIsLoading(true);
       setPage(1);
-
       const charactersOrError = await getCharactersByPageUseCase.execute(1);
       if (charactersOrError.isRight()) {
         const current = charactersOrError.value.characters;

@@ -5,19 +5,12 @@
     "baseUrl": ".",
     "paths": {
       "@/assets/*": ["src/assets/*"],
-      "@/components/*": ["src/components/*"],
       "@/constants/*": ["src/constants/*"],
       "@/data/*": ["src/data/*"],
       "@/domain/*": ["src/domain/*"],
-      "@/hooks/*": ["src/hooks/*"],
       "@/infra/*": ["src/infra/*"],
-      "@/interfaces/*": ["src/interfaces/*"],
       "@/main/*": ["src/main/*"],
-      "@/routes/*": ["src/main/routes/*"],
-      "@/screens/*": ["src/screens/*"],
-      "@/services/*": ["src/services/*"],
       "@/shared/*": ["src/shared/*"],
-      "@/styles/*": ["src/styles/*"],
       "@/ui/*": ["src/ui/*"]
     }
   }

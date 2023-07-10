@@ -1,4 +1,4 @@
-import { Loading } from '@/components/index';
+import { Loading } from '@/ui/components/index';
 import { Routes } from '@/main/routes/index';
 import {
   Lexend_600SemiBold,

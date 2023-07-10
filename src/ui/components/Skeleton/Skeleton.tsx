@@ -1,4 +1,4 @@
-import { Theme } from '@/styles';
+import { Theme } from '@/ui/styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FC, useEffect, memo } from 'react';
 import { ViewProps } from 'react-native';

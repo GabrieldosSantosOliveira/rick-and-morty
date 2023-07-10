@@ -1,4 +1,4 @@
-import { Theme } from '@/styles/Theme';
+import { Theme } from '@/ui/styles/Theme';
 import { memo } from 'react';
 import { View } from 'react-native';
 
