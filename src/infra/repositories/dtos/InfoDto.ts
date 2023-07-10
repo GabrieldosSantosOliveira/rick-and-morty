@@ -1,4 +1,4 @@
-export interface Info {
+export interface InfoDto {
   count: number;
   pages: number;
   next: string | null;

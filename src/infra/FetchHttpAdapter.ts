@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpError } from '@/errors';
-import { IHttpService, Options, Response } from '@/interfaces';
+import { HttpClient, Options, Response } from '@/data/protocols/HttpClient';
 
-export class HttpServiceFetch implements IHttpService {
+export class FetchHttpAdapter implements HttpClient {
   async get<T = any>(url: string): Promise<Response<T>> {
     const res = await fetch(url);
-    new HttpError(res.status);
     const data = await res.json();
     return { data, statusCode: res.status };
   }
@@ -14,7 +11,6 @@ export class HttpServiceFetch implements IHttpService {
     options: Options | undefined,
   ): Promise<Response<T>> {
     const res = await fetch(url, { method: 'DELETE', body: options?.data });
-    new HttpError(res.status);
     const data = await res.json();
     return { data, statusCode: res.status };
   }
@@ -23,7 +19,6 @@ export class HttpServiceFetch implements IHttpService {
     options: Options | undefined,
   ): Promise<Response<T>> {
     const res = await fetch(url, { method: 'POST', body: options?.data });
-    new HttpError(res.status);
     const data = await res.json();
     return { data, statusCode: res.status };
   }
@@ -32,7 +27,6 @@ export class HttpServiceFetch implements IHttpService {
     options: Options | undefined,
   ): Promise<Response<T>> {
     const res = await fetch(url, { method: 'PUT', body: options?.data });
-    new HttpError(res.status);
     const data = await res.json();
     return { data, statusCode: res.status };
   }
@@ -41,7 +35,6 @@ export class HttpServiceFetch implements IHttpService {
     options: Options | undefined,
   ): Promise<Response<T>> {
     const res = await fetch(url, { method: 'PATCH', body: options?.data });
-    new HttpError(res.status);
     const data = await res.json();
     return { data, statusCode: res.status };
   }

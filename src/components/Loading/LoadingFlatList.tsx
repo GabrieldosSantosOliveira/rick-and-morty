@@ -17,7 +17,7 @@ const LoadingFlatListBase: FC<LoadingFlatListProps> = ({ isLoading }) => {
         paddingVertical: 12,
       }}
     >
-      <ActivityIndicator size="large" color={Theme.colors.primary} />
+      <ActivityIndicator size="small" color={Theme.colors.primary} />
     </View>
   );
 };

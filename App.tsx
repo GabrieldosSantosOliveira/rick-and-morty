@@ -1,6 +1,5 @@
-import { Loading } from '@/components';
-import { ServiceProvider } from '@/contexts/ServiceContext';
-import { Routes } from '@/routes';
+import { Loading } from '@/components/index';
+import { Routes } from '@/main/routes/index';
 import {
   Lexend_600SemiBold,
   Lexend_700Bold,
@@ -13,13 +12,13 @@ export default function App() {
     Lexend_700Bold,
   });
   return (
-    <ServiceProvider>
+    <>
       <StatusBar
         barStyle="light-content"
         translucent
         backgroundColor="transparent"
       />
       {isFontsLoaded ? <Routes /> : <Loading />}
-    </ServiceProvider>
+    </>
   );
 }

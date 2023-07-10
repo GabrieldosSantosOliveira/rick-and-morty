@@ -1,7 +1,8 @@
-import { Episodes, Characters } from '@/screens';
-import { Theme } from '@/styles';
+import { Theme } from '@/styles/Theme';
 import { Fontisto, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MakeCharacters } from '../factories/screens/MakeCharacters';
+import { MakeEpisodes } from '../factories/screens/MakeEpisodes';
 const { Screen, Navigator } = createBottomTabNavigator();
 export const AppRoutes = () => {
   const { colors, fonts } = Theme;
@@ -31,7 +32,7 @@ export const AppRoutes = () => {
           ),
           tabBarLabel: 'Personagens',
         }}
-        component={Characters}
+        component={MakeCharacters}
       />
       <Screen
         name="episodes"
@@ -41,7 +42,7 @@ export const AppRoutes = () => {
           ),
           tabBarLabel: 'Episódios',
         }}
-        component={Episodes}
+        component={MakeEpisodes}
       />
     </Navigator>
   );

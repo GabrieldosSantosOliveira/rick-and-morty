@@ -1,35 +1,40 @@
-import { CharacterDto } from '@/models';
-import { GetCharacters } from '@/services';
 import { useState } from 'react';
 
-import { useService } from './useService';
+import { GetCharactersByPageUseCase } from '@/domain/use-cases/GetCharactersByPageUseCase';
+import { Character } from '@/domain/entities/Character';
 
-export const useCharacters = () => {
+export const useCharacters = (
+  getCharactersByPageUseCase: GetCharactersByPageUseCase,
+) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasMoreData, setHasMoreData] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   const [page, setPage] = useState<number>(1);
-  const [characters, setCharacters] = useState<CharacterDto[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
 
-  const { httpService } = useService();
-  const getCharacters = new GetCharacters(httpService);
   async function fetchCharacters() {
     try {
       if (!hasMoreData) return;
-      const { data } = await getCharacters.getAllCharacters(page);
-      const current = data.results.filter(
-        (character) => !characters.includes(character),
-      );
-      setPage((prev) => prev + 1);
-      setCharacters((prev) => {
-        const characters = {} as { [key: number]: CharacterDto };
-        [...prev, ...current].forEach((item) => {
-          characters[item.id] = item;
+      const charactersOrError = await getCharactersByPageUseCase.execute(page);
+     console.log("jj")
+      if (charactersOrError.isRight()) {
+        const current = charactersOrError.value.characters.filter(
+          (character) => !characters.includes(character),
+        );
+        setPage((prev) => prev + 1);
+        setCharacters((prev) => {
+          const characters = {} as { [key: number]: Character };
+          [...prev, ...current].forEach((item) => {
+            characters[item.id] = item;
+          });
+          return Object.values(characters);
         });
-        return Object.values(characters);
-      });
-      if (!data.info.next) {
+        if (!charactersOrError.value.info.next) {
+          setHasMoreData(false);
+        }
+      }
+      if (charactersOrError.isLeft()) {
         setHasMoreData(false);
       }
     } catch {
@@ -45,16 +50,18 @@ export const useCharacters = () => {
       setHasMoreData(true);
       setIsLoading(true);
       setPage(1);
-      const { data } = await getCharacters.getAllCharacters(1);
-      const current = data.results;
-      setCharacters(current);
-      if (data.info.next) {
-        setPage((prev) => prev + 1);
-      } else {
-        setHasMoreData(false);
+
+      const charactersOrError = await getCharactersByPageUseCase.execute(1);
+      if (charactersOrError.isRight()) {
+        const current = charactersOrError.value.characters;
+        setCharacters(current);
+        if (charactersOrError.value.info.next) {
+          setPage((prev) => prev + 1);
+        } else {
+          setHasMoreData(false);
+        }
       }
     } catch (error) {
-      console.log(error);
     } finally {
       setIsLoading(false);
       setIsRefreshing(false);

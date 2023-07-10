@@ -1,8 +1,11 @@
-import { EpisodeDto } from '@/models';
-import { Theme } from '@/styles';
-import { FC, memo } from 'react';
+import { Theme } from '@/styles/Theme';
+import React, { FC, memo } from 'react';
 import { Text, View } from 'react-native';
-const EpisodeBase: FC<EpisodeDto> = ({ name, episode, air_date }) => {
+import { Episode as EpisodeUiModel } from '@/domain/entities/Episode';
+export interface EpisodeProps {
+  episode: EpisodeUiModel;
+}
+const EpisodeBase: FC<EpisodeProps> = ({ episode }) => {
   const { colors, fonts } = Theme;
   return (
     <View
@@ -23,7 +26,7 @@ const EpisodeBase: FC<EpisodeDto> = ({ name, episode, air_date }) => {
           color: colors.white,
         }}
       >
-        {name} - {episode}
+        {episode.name} - {episode.episode}
       </Text>
       <Text
         style={{
@@ -32,7 +35,7 @@ const EpisodeBase: FC<EpisodeDto> = ({ name, episode, air_date }) => {
           color: colors.black,
         }}
       >
-        {air_date}
+        {episode.airDate}
       </Text>
     </View>
   );

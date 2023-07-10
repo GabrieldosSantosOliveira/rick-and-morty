@@ -1,8 +1,11 @@
-import { CharacterDto } from '@/models/CharacterDto';
 import { Theme } from '@/styles/Theme';
 import { memo, useState } from 'react';
 import { Image, Text, View, ActivityIndicator } from 'react-native';
-const CharacterBase = (props: CharacterDto) => {
+import { Character as CharacterUiModel } from '@/domain/entities/Character';
+export interface CharacterProps {
+  character: CharacterUiModel;
+}
+const CharacterBase = ({ character }: CharacterProps) => {
   const [isImageIsLoad, setIsImageIsLoad] = useState<boolean>(false);
   const { colors } = Theme;
   return (
@@ -29,7 +32,7 @@ const CharacterBase = (props: CharacterDto) => {
               borderRadius: 8,
             },
           ]}
-          source={{ uri: props.image }}
+          source={{ uri: character.image }}
           onLoad={() => setIsImageIsLoad(true)}
         />
         {isImageIsLoad ? null : (
@@ -66,7 +69,7 @@ const CharacterBase = (props: CharacterDto) => {
             textAlign: 'center',
           }}
         >
-          {props.name}
+          {character.name}
         </Text>
       </View>
     </View>

@@ -5,14 +5,18 @@ import {
   LoadingFlatList,
   RefreshControl,
   SkeletonEpisodes,
-} from '@/components';
-import { useEpisodes } from '@/hooks';
-import { EpisodeDto } from '@/models';
-import { Theme } from '@/styles';
+} from '@/components/index';
+import { useEpisodes } from '@/hooks/useEpisodes';
+import { Episode as EpisodeUiModel } from '@/domain/entities/Episode';
+import { Theme } from '@/styles/Theme';
 import { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
-import {FlashList, ListRenderItem} from '@shopify/flash-list'
-export const Episodes = () => {
+import { FlashList, ListRenderItem } from '@shopify/flash-list';
+import { GetEpisodesByPageUseCase } from '@/domain/use-cases/GetEpisodesByPageUseCase';
+export interface EpisodesProps {
+  getEpisodesByPageUseCase: GetEpisodesByPageUseCase;
+}
+export const Episodes = ({ getEpisodesByPageUseCase }: EpisodesProps) => {
   const { colors } = Theme;
 
   const {
@@ -22,10 +26,10 @@ export const Episodes = () => {
     fetchEpisodes,
     handleRefresh,
     hasMoreData,
-  } = useEpisodes();
+  } = useEpisodes(getEpisodesByPageUseCase);
 
-  const renderItem: ListRenderItem<EpisodeDto> = useCallback(({ item ,}) => {
-    return <Episode {...item} />;
+  const renderItem: ListRenderItem<EpisodeUiModel> = useCallback(({ item }) => {
+    return <Episode episode={item} />;
   }, []);
   useEffect(() => {
     fetchEpisodes();
@@ -37,15 +41,15 @@ export const Episodes = () => {
         <SkeletonEpisodes />
       ) : (
         <FlashList
-        data={episodes}
-        refreshControl={
+          data={episodes}
+          refreshControl={
             <RefreshControl
               refreshing={isRefreshing}
               onRefresh={handleRefresh}
             />
           }
           ListEmptyComponent={<ListEmptyEpisodes />}
-          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal:12 }}
+          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 12 }}
           onEndReached={fetchEpisodes}
           onEndReachedThreshold={0.1}
           renderItem={renderItem}

@@ -6,7 +6,7 @@ export interface Response<T> {
   statusCode: number;
   data: T;
 }
-export interface IHttpService {
+export interface HttpClient {
   get<T = any>(url: string): Promise<Response<T>>;
   delete<T = any>(
     url: string,

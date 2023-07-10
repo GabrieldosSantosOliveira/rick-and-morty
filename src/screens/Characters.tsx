@@ -5,15 +5,18 @@ import {
   HeaderCharacter,
   RefreshControl,
   ListEmptyCharacters,
-} from '@/components';
-import { useCharacters } from '@/hooks';
-import { CharacterDto } from '@/models';
-import { Theme } from '@/styles';
+} from '@/components/index';
+import { useCharacters } from '@/hooks/useCharacters';
+import { Theme } from '@/styles/Theme';
 import { useCallback, useEffect } from 'react';
-import {  View } from 'react-native';
-import {ListRenderItem, FlashList
-} from '@shopify/flash-list'
-export const Characters = () => {
+import { View } from 'react-native';
+import { ListRenderItem, FlashList } from '@shopify/flash-list';
+import { GetCharactersByPageUseCase } from '@/domain/use-cases/GetCharactersByPageUseCase';
+import { Character as CharacterUiModel } from '@/domain/entities/Character';
+export interface CharactersProps {
+  getCharactersByPageUseCase: GetCharactersByPageUseCase;
+}
+export const Characters = ({ getCharactersByPageUseCase }: CharactersProps) => {
   const {
     isLoading,
     fetchCharacters,
@@ -21,10 +24,10 @@ export const Characters = () => {
     hasMoreData,
     isRefreshing,
     characters,
-  } = useCharacters();
+  } = useCharacters(getCharactersByPageUseCase);
 
-  const renderItem: ListRenderItem<CharacterDto> = useCallback(
-    ({ item }) => <Character {...item} />,
+  const renderItem: ListRenderItem<CharacterUiModel> = useCallback(
+    ({ item }) => <Character character={item} />,
     [],
   );
   useEffect(() => {
@@ -42,7 +45,7 @@ export const Characters = () => {
         <SkeletonCharacters />
       ) : (
         <FlashList
-          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal:12 }}
+          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 12 }}
           data={characters}
           ListEmptyComponent={<ListEmptyCharacters />}
           refreshControl={
@@ -54,7 +57,7 @@ export const Characters = () => {
           renderItem={renderItem}
           estimatedItemSize={166}
           keyExtractor={({ id }) => String(id)}
-          onEndReachedThreshold={0.1}
+          onEndReachedThreshold={0.2}
           onEndReached={fetchCharacters}
           ListFooterComponent={<LoadingFlatList isLoading={hasMoreData} />}
         />

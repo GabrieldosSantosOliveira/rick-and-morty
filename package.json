@@ -10,7 +10,7 @@
     "format": "prettier -w .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test":"jest --passWithNoTests"
+    "test": "jest --passWithNoTests"
   },
   "author": "Gabriel dos Santos Oliveira <gabrielsantosoliveira951@gmail.com>",
   "license": "MIT",
